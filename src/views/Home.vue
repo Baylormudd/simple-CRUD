@@ -1,18 +1,31 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    hey
+    
+    <article  v-for="post in posts" :key="post.id">
+    
+    <h1>{{ post.title }}</h1>
+    <h1>{{ post.description }}</h1>
+    
+  </article>
+
   </div>
 </template>
 
 <script>
+import { mapState, mapGetters, mapActions } from 'vuex';
 // @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue';
-
+ import db from "@/db";
 export default {
-  name: 'home',
-  components: {
-    HelloWorld,
+  name: 'Home',
+  methods: mapActions('home',['initPosts']),
+  computed: mapState('home',['posts','post']),
+  data (){
+    return {
+    }
+  },
+  mounted(){
+    this.initPosts();
   },
 };
 </script>
